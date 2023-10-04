@@ -1,26 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Quiz</title>
-    <link rel="stylesheet" href="./assets/style.css">
-    <script src="./assets/script.js"></script>
-</head>
-<body>
-    <div id="quiz"></div>
-    <div class="quiz">
-        <h1>Movie Quiz Using JavaScript</h1>
-        <p>You have 10 minutes to complete this quiz. Good Luck!</p> 
-        <button onclick="startButton" id="startBtn">START</button>
-        <h2 class="time" style="text-align: center;"></h2>
-        <div class="questions" id="quest"></div>
-        <div class="option" id="opt"></div>
-        <button onclick="checkAns()" id="btn">SUBMIT</button>
-        <div id="score"></div>
-        
-    </div>
+    <link rel="stylesheet" href="./assets/style.css" />
     
-</body>
-   
+  </head>
+  <body>
+    <header>
+      <div class="quiz" id="quiz">
+        <h1>Movie Quiz Using JavaScript</h1>
+        <p>You have two minutes to complete this quiz. Good Luck!</p>
+        <button class="startButton"  id="startBtn">START</button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="time" style="text-align: center"></h2>
+        <div class="container">
+            <div class="questions" id="quest">
+                    <li>Question</li>
+                    <li>OptionA</li>
+                    <li>OptionB</li>
+                    <li>OptionC</li>
+                    <li>OptionD</li>
+                    <li>Answer</li>
+            </div>   
+        </div>
+        
+        </div>
+        <div class="option" id="opt"></div>
+        <button class="checkAns()" id="btn">SUBMIT</button>
+        <div id="score"></div>
+      </section>
+      <section>
+        <div class="card results">
+            <div class = "correct-incorrect-container">
+            <div>
+            <h3>Wins: <span class="win">0 </span> </h3>
+            <h3>Losses: <span class="lose">0</span></h3>
+          </div>
+            <button class="reset-button">Reset Score</button>
+        </div>
+      </section>
+      
+
+        
+
+    </main>
+    <script src="./assets/script.js"></script>
+  </body>
 </html>
