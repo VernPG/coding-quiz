@@ -1,8 +1,9 @@
 var quiz = document.querySelector(".quiz");
+var startBtn = document.querySelector(".startButton");
 var timeEl = document.querySelector(".time");
 var questions= document.querySelector(".questions");
 var options = document.querySelector("opt");
-var btn = document.querySelector("btn");
+var submitBtn = document.querySelector("btn");
 var score = document.querySelector("score");
 var chosenQuestion = "";
 var winCounter = 0;
@@ -66,16 +67,52 @@ function startTimer () {
     }, 1000);
 }
 
+let currQuestion = 0
+let score = 0
+
 //how to get questions to populate
+
 function renderQuestions(){
+  chosenQuestion =quest[Math.floor(Math.random() * quest.length)];
 
 }
 
-//how to get questions to give win or lose response
+//how to ccheck the answer
+function checkAns() {
+  const selectedAns = parseInt(document.querySelector('input[name="answer"]:checked').value);
+
+  if (Questions[currQuestion].a[selectedAns].isCorrect) {
+      score++;
+      console.log("Correct")
+      nextQuestion();
+  } else {
+      nextQuestion();
+  }
+}
+
+
+//how to get the next question to load
+
+function nextQuestion() {
+  if (currQuestion < Questions.length - 1) {
+      currQuestion++;
+      loadQuest();
+  } else {
+      document.getElementById("opt").remove()
+      document.getElementById("quest").remove()
+      document.getElementById("btn").remove()
+      loadScore();
+  }
+}
 
 //how to get tally and then scorecard to populate to add initials
 
+function loadScore(){
+  const totalScore = document.getElementById("score")
+  totalScore.textContent= "Correct, you scored ${score} out of ${Questions.length}"
+}
 
+//add event listeners
 
-
+btn.addEventListener("click", startGame);
 
