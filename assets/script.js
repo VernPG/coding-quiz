@@ -5,12 +5,12 @@ var questions= document.querySelector("quest");
 var options = document.querySelector("opt");
 var checkAns = document.querySelector("btn");
 var score = document.querySelector("score");
-var correct = true
-var incorrect = false
+var correct = true;
+var incorrect = false;
 var chosenQuestion = "";
 var winCounter = 0;
 var loseCounter= 0;
-var isWin = false;
+// var isWin = false;
 var timer;
 var timerCount;
 var scorecard;
@@ -19,20 +19,20 @@ var quest = [
   {
     question: "In The Matrix, does Neo take the blue pill or the red pill?",
     answers:[
-    {text: "Blue", answer:false},
-    {text: "Black",answer:false},
-    {text: "Red",answer: true,},
-    {text: "Yellow",answer:false}
+    {choice1: "Blue", answer:false},
+    {choice2: "Black",answer:false},
+    {choice3: "Red",answer: true,},
+    {choice4: "Yellow",answer:false}
     // { answer: "C",}
   ]
   },
   {
     question: "In Monty Python and the Search for the Holy Grail, King Arthur's Knights of the Round Table include: Sir Bedevere, Sir Lancelot, Sir Galahad, Sir Robin, and ...",
     answers: [
-    {text: "The Black Knight",answer:false},
-    {text: "Sir Not-Appearing-In-This-Film", answer: true,},
-    {text: "Tim the Enchanter",answer:false},
-    {text: "The Knights Who Say Ni",answer:false}
+    {choice1: "The Black Knight",answer:false},
+    {choice2: "Sir Not-Appearing-In-This-Film", answer: true,},
+    {choice3: "Tim the Enchanter",answer:false},
+    {choice4: "The Knights Who Say Ni",answer:false}
     // answer: "B",
   ]
   }]
@@ -52,11 +52,12 @@ var quest = [
 function start() {
   scorecard = JSON.parse(localStorage.getItem("scorecard"))
 }
+
 function saveChanges() {
   localStorage.setItem("scorecard", JSON.stringify(scorecard))
 }
 
-startBtn.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", startQuestions);
 startBtn.addEventListener("click", startTimer);
 
 // start timer
@@ -72,14 +73,41 @@ function startTimer () {
     }, 1000);
 }
 
-
-function startQuiz (){
-  var quest= document.getElementById ("questions", quest);
- 
-
-
+function startQuestions () {
+  var q =quest[currQuestionIndex];
+var pTag = document.createElement("p");
+pTag.textContent = q.question;
+questionContainer.appendChild(pTag)
+for (var i = 0; i < q.opt.length; i++){
+  var btn = document.createElement("button")
+  btn.textContent = opt[i]
+  questionContainer.appendChild[btn]
+  }
 }
 
+
+// function startQuestions (){
+//   var currQuestion= getRandom(questions);
+//   questions.textContent= currQuestion.question;
+//   button1.textContent = currQuestion.choice1;
+//   button2.textContent = currQuestion.choice2;
+//   button3.textContent = currQuestion.choice3;
+//   button4.textContent = currQuestion.choice4;
+//   quest.addEventListener("click", function(event{
+    
+
+//   }))
+
+
+
+  
+  // var currQuestion= getQuestions(quest);
+  // quest.textContent =currQuestion;
+  // button1.textContent = currQuestion.choice1;
+ 
+  // quest.addEventListener("click", function(event){
+
+  
 
 
 //how to check the answer
@@ -132,7 +160,7 @@ function setWins() {
 
 function setLosses() {
   lose.textContent = loseCounter;
-  localStorage.setItem("loseCount", loseCounter);
+  localStorage.setItem("loseCounter", loseCounter);
 }
 
 function getWins(){
