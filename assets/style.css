@@ -17,6 +17,10 @@ body {
  
 }
 
+.hide {
+    display: none;
+
+}
 h2 .time {
     border-radius: 5px;
     color: whitesmoke;

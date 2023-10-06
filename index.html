@@ -18,25 +18,23 @@
 
     <main>
       <section>
-        <h2 class="time" style="text-align: center"></h2>
-        <div class="container">
-            <div class="questions" id="quest">
-                    <p>"Question"</p>
-                    <button> choice1="button" class=""text</button>
-                    <button> choice2="button" class="text"</button>
-                    <button> choice3="button" class="text"</button>
-                    <button> choice4="button" class="text"</button>
-                    <li>"Answer"</li>
-            </div>   
+        <div id="question-container" class="hide" >
+          <h2 class="time" style="text-align: center"></h2>
+          <div class="container">
+              <div class="questions" id="quest"></div>   
+          </div>
+
+        </div>
+        <div class ="hide">
+          <div class="option" id="opt"></div>
+          <button class="checkAns()" id="btn">SUBMIT</button>
+          <div id="score"></div>
+
         </div>
         
-        </div>
-        <div class="option" id="opt"></div>
-        <button class="checkAns()" id="btn">SUBMIT</button>
-        <div id="score"></div>
       </section>
       <section>
-        <div class="card results">
+        <div class="card results ">
             <div class = "correct-incorrect-container">
             <div>
             <h3>Wins: <span class="win">0 </span> </h3>
