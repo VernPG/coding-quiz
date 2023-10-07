@@ -5,48 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie Quiz</title>
     <link rel="stylesheet" href="./assets/style.css" />
-    
   </head>
   <body>
     <header>
       <div class="quiz" id="quiz">
         <h1>Movie Quiz Using JavaScript</h1>
         <p>You have two minutes to complete this quiz. Good Luck!</p>
-        <button class="startButton"  id="startBtn">START</button>
+        <button class="startButton" id="startBtn">START</button>
       </div>
     </header>
 
     <main>
       <section>
-        <div id="question-container" class="hide" >
-          <h2 class="time" style="text-align: center"></h2>
+        <div id="question-container" class="hide">
+          <h2 class="time" style="display: block">GO! Seconds remaining...</h2>
           <div class="container">
-              <div class="questions" id="quest"></div>   
+            <div class="questions" id="quest"></div>
           </div>
-
         </div>
-        <div class ="hide">
+        <div class="hide">
           <div class="option" id="opt"></div>
           <button class="checkAns()" id="btn">SUBMIT</button>
-          <div id="score"></div>
-
+          <!-- <div id="score"></div> -->
         </div>
-        
       </section>
       <section>
-        <div class="card results ">
-            <div class = "correct-incorrect-container">
+        <div class="card results hide">
+          <div class="correct-incorrect-container">
             <div>
-            <h3>Wins: <span class="win">0 </span> </h3>
-            <h3>Losses: <span class="lose">0</span></h3>
+              <h3>Wins: <span class="win">0</span></h3>
+              <h3>Losses: <span class="lose">0</span></h3>
+            </div>
+            <button class="restart-button">Restart Quiz</button>
           </div>
-            <button class="reset-button">Reset Score</button>
+          <div id="score" class="score">
+            <div id="scoreArea" class="scoreArea"></div>
+            <form id="inName" class="inName"></form>
+            <div id="saveButton" class="saveButon"></div>
+          </div>
+          <div id="highScores" class="highScores">
+            <div id="high-score-title"></div>
+          </div>
         </div>
       </section>
-      
-
-        
-
     </main>
     <script src="./assets/script.js"></script>
   </body>

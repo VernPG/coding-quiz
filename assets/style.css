@@ -1,6 +1,6 @@
 body {
-    background-color:grey;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color:aliceblue;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .quiz {
@@ -8,12 +8,24 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: rgb(53, 23, 53); 
+    color: rgb(4, 98, 98);
+    font-size: 20px; 
+    border: 0.5rem outset rgb(131, 26, 89);
+    outline: 0.5rem solid rgb(4, 98, 98);
+    box-shadow: 0 0 0 2rem rgb(70, 29, 182);
+    border-radius: 12px;
+    font: bold 1rem sans-serif;
+    margin: 2rem;
+    padding: 1rem;
+    outline-offset: 0.5rem;
 }
 
-.question {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.question-container {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 50px;
+    color: rgb(4, 98, 98);
+   
+    
  
 }
 
@@ -21,22 +33,24 @@ body {
     display: none;
 
 }
-h2 .time {
+
+
+main {
+    color:rgb(4, 98, 98);
+    font-size: 40px;
+ 
+
+
+}
+
+.time {
     border-radius: 5px;
-    color: whitesmoke;
+    border-color: rgb(131, 26, 89);
+    color: rgb(4, 98, 98);
+    font-size: 50px;
+    
 }
 
-.container {
-
-
-}
-
-li {
-    color: whitesmoke;
-    list-style-type: none;
-    padding-bottom: 20px;
-
-}
 
 .option {
     font-size: 25px;
@@ -44,16 +58,47 @@ li {
 }
 
 button {
-    background-color: rgb(131, 26, 89);
+    background-color: rgb(70, 29, 182);
     color: whitesmoke;
     font-weight: bold;
-    align-items: center;
+    align-items:center;
+    font-size: 20px;
+    border: 0.5rem outset rgb(70, 29, 182);
+    outline: 0.5rem solid rgb(131, 26, 89);
+    box-shadow: 0 0 0 2rem rgb(4, 98, 98);
+    border-radius: 12px;
+    font: bold 1rem sans-serif;
+    margin: 2rem;
+    padding: 1rem;
+    outline-offset: 0.5rem;
 }
-h3 {
-    color: rgb(70, 29, 182);
+.correct-incorrect-container {
+    border: 0.5rem outset rgb(131, 26, 89);
+    outline: 0.5rem solid rgb(4, 98, 98);
+    box-shadow: 0 0 0 2rem rgb(70, 29, 182);
+    border-radius: 12px;
+    font: bold 1rem sans-serif;
+    margin: 2rem;
+    padding: 1rem;
+    outline-offset: 0.5rem;
+
    
 }
+.score {
+    border: 0.5rem outset rgb(70, 29, 182);
+    outline: 0.5rem solid rgb(131, 26, 89);
+    box-shadow: 0 0 0 2rem rgb(4, 98, 98);
+    border-radius: 12px;
+    font: bold 1rem sans-serif;
+    margin: 2rem;
+    padding: 1rem;
+    outline-offset: 0.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 50px;
+    color: rgb(4, 98, 98);
+    display: block;
 
+}
 section {
     text-align: center;
   

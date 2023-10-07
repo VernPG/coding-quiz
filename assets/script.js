@@ -10,7 +10,8 @@ var quizQuestions = [
     options: [
       "The Black Knight",
       "Sir Not-Appearing-In-This-Film",
-      "Tim the Enchanter","The Knights Who Say Ni"
+      "Tim the Enchanter",
+      "The Knights Who Say Ni",
     ],
     correct: "Sir Not-Appearing-In-This-Film",
   },
@@ -24,7 +25,7 @@ var quizQuestions = [
       "Gone with the Wind",
     ],
     correct: "Gone with the Wind",
-  }
+  },
 ];
 var questContainer = document.querySelector("#question-container");
 var quiz = document.querySelector(".quiz");
@@ -34,29 +35,65 @@ var questionArea = document.querySelector("#quest");
 var currQuestion = document.querySelector(".questions");
 var options = document.querySelector("#opt");
 var checkAns = document.querySelector("#btn");
-var score = document.querySelector("#score");
+var scorePageEl = document.querySelector("#score");
+// var score = document.querySelector(".correct-incorrect-container");
 var scoreContainer = document.querySelector(".card");
+var win = document.querySelector(".win");
+var lose = document.querySelector(".lose");
+var resetBtn = document.querySelector(".restart-button");
+var scoreAreaEl = document.querySelector('#scoreArea');
+var inNameEl = document.querySelector('#inName');
+var buttonDivEl = document.querySelector('#saveButton');
+var highScoreEl = document.querySelector('#highScores');
 var correct = true;
 var incorrect = false;
 var chosenQuestion = "";
 var winCounter = 0;
 var loseCounter = 0;
-// var isWin = false;
+var isWin = false;
 var timer;
 var timerCount;
 var scorecard;
 var qIndex = 0;
 
+function init() {
+  getWins();
+  getlosses();
+}
+function startQuiz() {
+  isWin = false;
+  timerCount = 10;
+  startBtn.disabled = true;
+  displayQuizQuestions()
+  startTimer()
+}
+function winQuiz() {
+  questContainer.textContent = "Winner!";
+  winCounter++;
+  startBtn.disabled = false;
+  setWins();
+}
+function loseQuiz() {
+  questContainer.textContent = "GAME OVER";
+  loseCounter++;
+  startBtn.disabled = true;
+  setLosses();
+}
 
-// start timer
 function startTimer() {
   timerCount = 10;
-  timer = setInterval(function () {
+  timer = setInterval(function() {
     timerCount--;
     timerElement.textContent = timerCount;
+    if (timerCount >= 0) {
+      if (isWin && timerCount > 0) {
+        clearInterval(timer);
+        winQuiz();
+      }
+    }
     if (timerCount === 0) {
       clearInterval(timer);
-      loseGame();
+      loseQuiz();
     }
   }, 1000);
 
@@ -66,9 +103,8 @@ function startTimer() {
 function displayQuizQuestions() {
   quiz.style.display = "none";
   questContainer.style.display = "block";
-  questionArea.innerHTML= "";
+  questionArea.innerHTML = "";
   var currQuestion = quizQuestions[qIndex];
-  //clear out previous question
   var pTag = document.createElement("p");
   pTag.textContent = currQuestion.question;
   questionArea.appendChild(pTag);
@@ -82,96 +118,79 @@ function displayQuizQuestions() {
   }
 }
 
-function displayOptions(e){
+function displayOptions(e) {
   var currOptions = quizQuestions[qIndex];
   qIndex++;
 
   if (e.target.textContent === currOptions.correct) {
-    alert("Correct Answer")
-        // answerIsCorrect();
-      } else {
-        alert("Wrong Answer")
-        
-        // answerIsWrong();
-      }
-  if (qIndex === quizQuestions.length){
+    alert("Correct Answer");
+  } else {
+    alert("Wrong Answer");
+  }
+  if (qIndex === quizQuestions.length) {
     questContainer.style.display = "none";
     scoreContainer.style.display = "block";
-    
-    
   }
   displayQuizQuestions();
 }
-
-// questionArea.addEventListener("click", function (event) {
-//   // var currOptions = quizQuestions[qIndex].options;
-//   qIndex++;
-//   displayQuizQuestions;
-//   console.log(event.target.textContent)
-  // if (event.target.matches("button")) {
-  //   if (event.target.textContent === currOptions.correct) {
-  //     answerIsCorrect();
-  //   } else {
-  //     answerIsWrong();
-  //   }
-  // }
-// });
-//start button to start game and timer
-// startBtn.addEventListener("click", start);
-// startBtn.addEventListener("click", startQuestions);
-startBtn.addEventListener("click", startTimer);
-
-//how to check the answer
-// function checkAns() {
-//   const selectedAns = parseInt(
-//     document.querySelector('input[name="answer"]:checked').value
-//   );
-
-//   if (questions[currQuestion].a[selectedAns].isCorrect) {
-//     score++;
-//     console.log("Correct");
-//     nextQuestion();
-//   } else {
-//     nextQuestion();
-//   }
-// }
-
-//how to get the next question to load
-
-function nextQuestion() {
-  if (currQuestion < questions.length - 1) {
-    currQuestion++;
-    loadQuest();
-  } else {
-    document.getElementById("opt").remove();
-    document.getElementById("quest").remove();
-    document.getElementById("btn").remove();
-    loadScore();
-  }
+function quizOver() {
+  clearInterval(timerCount);
+  timerElement.innerHTML = "Finished";
+  displayScore();
+  savedScore ();
 }
+function displayScore () {
+  questContainer.replaceWith(scorePageEl);
+  scoreAreaEl.innerText = "Final Score:" + score;
+  initTextEl = document.createElement("input"); 
+  initTextEl.setAttribute("id", "initails-input"); 
+  initTextEl.setAttribute("type", "text"); 
+  initTextEl.setAttribute("name", "iniatials"); 
+  initTextEl.setAttribute("placeholder", "Enter Initials here"); 
+    
+  inNameEl.appendChild(initTextEl);
+  saveButtonEl = document.createElement("button");
+  saveButtonEl.setAttribute("id" , "save-btn");
+  saveButtonEl.setAttribute("class" ,"save-btn");
+  saveButtonEl.setAttribute("type" , "submit");
+  saveButtonEl.textContent = "Save Score";
 
-//how to get tally and then scorecard to populate to add initials
-function winGame() {
-  quiz.textContent = "Winner!";
-  winCounter++;
-  startBtn.disabled = false;
-  setWins();
+  inNameEl.appendChild(saveButtonEl);
+
+  inNameEl.addEventListener("submit", viewHighScores);
 }
-
-function loseGame() {
-  quiz.textContent = "You Lose!";
-  loseCounter++;
-  startBtn.disabled = false;
-  setLosses();
+function viewHighScores (e) { 
+  e.preventDefault();
+    var name = document.querySelector("#initails-input").value;
+    savedInit(name);
+    
+    scorePageEl.replaceWith(highScoreEl)
+    loadSaveScores();
+  
 }
+var savedScore = function() {
+  localStorage.setItem("score", JSON.stringify(score));
+}
+var savedInit = function(initails) {
+  localStorage.setItem("initails", JSON.stringify(initails));
+}
+function loadSaveScores() {
+  var savedScore = localStorage.getItem("score");
+  var savedInit = localStorage.getItem("initails");
 
+  savedScore  = JSON.parse(savedScore);
+  savedInit = JSON.parse(savedInit);
+
+  document.getElementById("highScores").innerHTML = savedInit + " - " + savedScore;
+ 
+}  
 function setWins() {
   win.textContent = winCounter;
-  localStorage.setItem("winCount", winCounter);
+  localStorage.setItem("winCounter", winCounter);
 }
 
 function setLosses() {
-  loseGame.textContent = loseCounter;
+  lose.textContent = loseCounter;
   localStorage.setItem("loseCounter", loseCounter);
 }
 
@@ -185,18 +204,30 @@ function getWins() {
   win.textContent = winCounter;
 }
 
-//End game?
-var resetButton = document.querySelector(".reset-button");
-function resetGame() {
+function getlosses() {
+  var storedLosses = localStorage.getItem("loseCount");
+  if (storedLosses === null) {
+    loseCounter = 0;
+  } else {
+    loseCounter = storedLosses;
+  }
+  lose.textContent = loseCounter;
+}
+//Get game going?
+init();
+
+var resetBtn = document.querySelector(".restart-button");
+
+function resetBtn() {
   winCounter = 0;
-  loseCounter = o;
+  loseCounter = 0;
   setWins();
   setLosses();
 }
 
 //add event listeners??????
-
-btn.addEventListener("click", checkAns);
+startBtn.addEventListener("click", startTimer);
+resetBtn.addEventListener("click", startQuiz);
 
 //local storage
 function start() {
@@ -207,7 +238,4 @@ function saveChanges() {
   localStorage.setItem("scorecard", JSON.stringify(scorecard));
 }
 
-// function loadScore(){
-//   const totalScore = document.getElementById("score")
-//   totalScore.textContent= "Correct, you scored ${score} out of ${Questions.length}"
-// }
+
