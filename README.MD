@@ -30,4 +30,4 @@ time and this area is still under development)
 
 **[Repo can be found HERE](https://github.com/VernPG/coding-quiz.git)
 
-**[Movie Quix can be found HERE]
+**[Movie Quiz can be found HERE](https://vernpg.github.io/coding-quiz/)
